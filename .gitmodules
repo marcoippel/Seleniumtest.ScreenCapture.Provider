@@ -1,0 +1,3 @@
+[submodule "Seleniumtest.Provider.Shared"]
+	path = Seleniumtest.Provider.Shared
+	url = https://github.com/marcoippel/Seleniumtest.Provider.Shared.git
