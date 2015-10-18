@@ -108,7 +108,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Seleniumtest.Provider.Shared\Seleniumtest.Provider.Shared\Seleniumtest.Provider.Shared.csproj">
+    <ProjectReference Include="..\Seleniumtest.Provider.Shared\Seleniumtest.Provider.Shared\Seleniumtest.Provider.Shared.csproj">
       <Project>{4344BE5E-0FAD-461F-9E2D-996C2115FE73}</Project>
       <Name>Seleniumtest.Provider.Shared</Name>
     </ProjectReference>

@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <title>Selenium screen capture provider</title>
+    <description>$description$</description>
+    <summary>Save your seleniumtest screen captures to a azure blobstorage. With a screen capture it is much easier to debug your failed selenium tests</summary>
+    <copyright>Copyright 2015</copyright>
+    <tags>Selenium, azure blobstorage, slack</tags>
+    <projectUrl>https://github.com/marcoippel/Seleniumtest.ScreenCapture.Provider</projectUrl>
+  <releaseNotes>
+  </releaseNotes>
+  </metadata>
+  <files>
+    <file src="app.config.install.xdt" target="content" />
+    <file src="app.config.uninstall.xdt" target="content" />
+    <file src="readme.txt" target="" />
+  </files>
+</package>

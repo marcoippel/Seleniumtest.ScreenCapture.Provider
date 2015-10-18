@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.IO;
 using System.Reflection;
 using System.Text;
@@ -15,6 +16,7 @@ namespace Seleniumtest.ScreenCapture.Provider
         private readonly IUrlHelper _urlHelper;
         private readonly IEmbeddedResourceHelper _embeddedResourceHelper;
         private readonly IAzureBlobStorage _azureBlobStorage;
+        private string _storageContainer;
         private ScreenCaptureJob ScreenCaptureJob { get; set; }
         private string OutputScreenCaptureFile { get; set; }
 
@@ -45,6 +47,14 @@ namespace Seleniumtest.ScreenCapture.Provider
             {
                 throw new DirectoryNotFoundException(string.Format("Directory {0} not found", tempFolder));
             }
+
+            _storageContainer = ConfigurationManager.AppSettings["AzureBlob:StorageContainer"];
+            if (string.IsNullOrEmpty(_storageContainer))
+            {
+                throw new NullReferenceException("There is in the appsettings no key found with name: AzureBlob: StorageContainer");
+            }
+
+
 
             OutputScreenCaptureFile = string.Format("{0}\\ScreenCapture.wmv", tempFolder);
             ScreenCaptureJob.OutputScreenCaptureFileName = OutputScreenCaptureFile;
@@ -87,7 +97,7 @@ namespace Seleniumtest.ScreenCapture.Provider
 
                 DateTime dateTime = DateTime.Now;
                 string videoFileName = Path.GetFileName(OutputScreenCaptureFile);
-                string blobVideoName = string.Format("seleniumscreencaptures/{0}/{1}/{2}/{3}{4}/{5}/{6}", dateTime.Year, dateTime.Month, dateTime.Day, environmentUrl, methodName, eventType, videoFileName);
+                string blobVideoName = string.Format("seleniumscreencaptures/{0}/{1}/{2}/{3}{4}/{5}/{6}/{7}", _storageContainer, dateTime.Year, dateTime.Month, dateTime.Day, environmentUrl, methodName, eventType, videoFileName);
 
                 byte[] fileByteArray = File.ReadAllBytes(OutputScreenCaptureFile);
 
@@ -103,7 +113,7 @@ namespace Seleniumtest.ScreenCapture.Provider
                 string fileName = string.Format("{0}.html", DateTime.Now.ToString("HH-mm-ss"));
 
                 
-                string blobFileName = string.Format("seleniumscreenshots/{0}/{1}/{2}/{3}{4}/{5}/{6}", dateTime.Year, dateTime.Month, dateTime.Day, environmentUrl, methodName, eventTypeName, fileName);
+                string blobFileName = string.Format("{0}/{1}/{2}/{3}{4}/{5}/{6}/{7}", _storageContainer, dateTime.Year, dateTime.Month, dateTime.Day, environmentUrl, methodName, eventTypeName, fileName);
                 _azureBlobStorage.Save("seleniumscreenshots", htmlTemplateByteArray, blobFileName, "text/html");
             }
         }

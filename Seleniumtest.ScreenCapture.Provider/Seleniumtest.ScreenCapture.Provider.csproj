@@ -54,6 +54,7 @@
       <HintPath>..\Library\Microsoft\Microsoft.Expression.Encoder.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
@@ -69,14 +70,22 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Seleniumtest.Provider.Shared\Seleniumtest.Provider.Shared\Seleniumtest.Provider.Shared.csproj">
-      <Project>{4344BE5E-0FAD-461F-9E2D-996C2115FE73}</Project>
+    <EmbeddedResource Include="Templates\EmbedVideo.html" />
+    <EmbeddedResource Include="Templates\ScreenCaptureTemplate.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Seleniumtest.Provider.Shared\Seleniumtest.Provider.Shared\Seleniumtest.Provider.Shared.csproj">
+      <Project>{4344be5e-0fad-461f-9e2d-996c2115fe73}</Project>
       <Name>Seleniumtest.Provider.Shared</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Templates\EmbedVideo.html" />
-    <EmbeddedResource Include="Templates\ScreenCaptureTemplate.html" />
+    <None Include="App.config.install.xdt" />
+    <None Include="App.config.uninstall.xdt" />
+    <None Include="Seleniumtest.ScreenCapture.Provider.nuspec" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="readme.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
