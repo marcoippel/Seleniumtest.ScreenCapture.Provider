@@ -3,6 +3,7 @@ using System.Configuration;
 using System.IO;
 using System.Reflection;
 using System.Text;
+using System.Threading;
 using System.Web;
 using Microsoft.Expression.Encoder.ScreenCapture;
 using Seleniumtest.Provider.Shared.Enum;
@@ -74,6 +75,10 @@ namespace Seleniumtest.ScreenCapture.Provider
         public void Stop()
         {
             ScreenCaptureJob.Stop();
+            if (File.Exists(OutputScreenCaptureFile))
+            {
+                File.Delete(OutputScreenCaptureFile);
+            }
         }
 
         /// <summary>
@@ -86,6 +91,8 @@ namespace Seleniumtest.ScreenCapture.Provider
         /// <param name="eventType">Type of the event.</param>
         public void Save(string pageSource, string url, string message, string methodName, EventType eventType)
         {
+            // So the video will have 2 seconds more so we can easier debugging
+            Thread.Sleep(2000);
             this.Stop();
             
             //Save the video file in the blobstorage container
